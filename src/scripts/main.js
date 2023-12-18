@@ -111,7 +111,11 @@ const COMMANDS = {
             };
             return lines.join("")
         }
-    }
+    },
+    "gpg": {
+        "description": "Gives you my GPG key.",
+        "exec": () => "178E7758DAEED8D64F6E17870FA334385D0B689F (available on Ubuntu keyserver)"
+    },
 };
 let MOBILE_ENABLED = false;
 
@@ -235,6 +239,7 @@ function commandWrapper(e) {
         body.appendChild(responseElement);
     }
     cmdElement.value = null;
+    body.appendChild(document.createElement("br"))
     body.appendChild(e.target)
     cmdElement.focus();
 }
