@@ -116,6 +116,14 @@ const COMMANDS = {
         "description": "Gives you my GPG key.",
         "exec": () => "178E7758DAEED8D64F6E17870FA334385D0B689F (available on Ubuntu keyserver)"
     },
+    "status": {
+        "description": "Checks a few services for a cursory uptime check.",
+        "exec": (input, output) => {
+            window.open("https://status.nexy7574.co.uk", "_blank");
+            return `Opening <a href='https://status.nexy7574.co.uk' target='_blank' rel='noopener'>https://status.nexy7574.co.uk</a> (this
+            feature is not implemented yet, however there's still the status monitor)`
+        }
+    }
 };
 let MOBILE_ENABLED = false;
 
@@ -243,4 +251,29 @@ function commandWrapper(e) {
     body.appendChild(e.target)
     cmdElement.focus();
 }
+let KEY_SEQUENCE = [];
+
+function toggleTransparentMode() {
+    if(ROOT.classList.contains("transparent")) {
+        // ROOT.classList.remove("transparent");
+        ROOT.parentElement.classList.remove("transparent")
+    }
+    else {
+        // ROOT.classList.add("transparent");
+        ROOT.parentElement.classList.add("transparent");
+    }
+}
+
+function toggleTransparent(e) {
+    console.debug(e);
+    KEY_SEQUENCE.push(e.key);
+    if(KEY_SEQUENCE.length > 3) {
+        KEY_SEQUENCE.shift();
+    }
+    if (KEY_SEQUENCE.join("") == "see") {
+        toggleTransparentMode();
+    }
+}
+document.addEventListener("keydown", (e) => {toggleTransparent(e)});
+
 document.getElementById("commandline").onsubmit = commandWrapper;

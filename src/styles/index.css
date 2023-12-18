@@ -54,7 +54,7 @@ html {
     overflow: unset;
     background: black;
     color: #fff;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 12px;
     padding: 6px;
     box-shadow: 5px 5px 10px #333;
@@ -107,7 +107,6 @@ html {
     cursor: text;
     overflow-y: scroll;
     overflow-x: hidden;
-    background: black;
     color: #eeeaee;
     max-height: 93.5%;
 }
@@ -147,6 +146,11 @@ a {
 
 .va {
     vertical-align: middle;
+}
+
+.transparent {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
 }
 
 @media screen and (max-width: 500px) {
