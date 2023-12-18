@@ -14,8 +14,8 @@ if(navigator.userAgent.includes("firefox")===true) {
 const _BD = new Date("2006-06-01T00:00:00");
 const _YO = () => {
     const now = new Date();
-    const seconds_delta = (now - _BD) / 100;
-    const years = Math.round(seconds_delta / 31536000) / 10;
+    const seconds_delta = (now - _BD) / 1000;
+    const years = Math.floor(seconds_delta / 31536000);
     return years;
 }
 const __ABOUT = `Hello! I am Nexus. I am a ${_YO()} year old programming from England. I enjoy programming and gaming, 
