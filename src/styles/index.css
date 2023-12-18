@@ -15,6 +15,11 @@ html, body {
     width: 100%;
 }
 
+html {
+    background-image: url('../images/background.JPEG');
+    background-size: auto
+}
+
 .hidden {
     display: none;
     visibility: hidden;
@@ -29,7 +34,7 @@ html, body {
     justify-content: center;
     align-items: center;
     align-content: center;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 
 .noul {
@@ -63,17 +68,17 @@ html, body {
     z-index: 100;
 }
 
-.console:has(.maximised) {
+.maximised {
     min-height: 100%;
     min-width: 100%;
 }
 
-.console:has(.minimised) {
+.minimised {
     max-width: 384px;
     max-height: 216px;
 }
 
-.console:has(.minimised) .body {
+.minimised > .body {
     display: none;
 }
 

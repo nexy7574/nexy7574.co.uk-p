@@ -128,9 +128,17 @@ function closeWindow(e) {
 function minimiseWindow(e) {
     console.debug("Minimising: %s", e);
     const consoleRoot = e.target.parentElement.parentElement.parentElement;
+
+    if (consoleRoot.classList.contains("maximised")) {
+        console.warn("%r is maximised, removing maximised class before continuing.");
+        consoleRoot.classList.remove("maximised");
+    }
+
     if(consoleRoot.classList.contains("minimised")) {
+        console.debug("Removing 'minimised' from %r", consoleRoot)
         consoleRoot.classList.remove("minimised");
     } else {
+        console.debug("Adding 'minimised' to %r", consoleRoot)
         consoleRoot.classList.add("minimised");
     };
 };
@@ -138,6 +146,11 @@ function minimiseWindow(e) {
 function maximiseWindow(e) {
     console.debug("Maximising: %s", e);
     const consoleRoot = e.target.parentElement.parentElement.parentElement;
+    if (consoleRoot.classList.contains("minimised")) {
+        console.warn("%r is minimised, removing minimised class before continuing.");
+        consoleRoot.classList.remove("minimised");
+    }
+
     if(consoleRoot.classList.contains("maximised")) {
         consoleRoot.classList.remove("maximised");
     } else {
@@ -148,10 +161,10 @@ function maximiseWindow(e) {
 for(let element of document.querySelectorAll("img[title='Minimise']")) {
     element.addEventListener("click", minimiseWindow);
 }
-for(let element of document.querySelectorAll("img[alt='Maximise']")) {
+for(let element of document.querySelectorAll("img[title='Maximise']")) {
     element.addEventListener("click", maximiseWindow);
 }
-for(let element of document.querySelectorAll("img[alt='Close']")) {
+for(let element of document.querySelectorAll("img[title='Close']")) {
     element.addEventListener("click", closeWindow);
 }
 
