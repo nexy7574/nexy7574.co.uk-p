@@ -32,6 +32,10 @@ html, body {
     padding: 1rem;
 }
 
+.noul {
+    text-decoration: none;
+}
+
 .console {
     font-family: 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     height: 80%;
@@ -41,7 +45,7 @@ html, body {
     min-width: 384px;
     min-height: 216px;
     overflow: unset;
-    background: #111;
+    background: black;
     color: #fff;
     border: 1px solid black;
     border-radius: 12px;
@@ -93,11 +97,15 @@ html, body {
 }
 
 .body {
-    cursor: vertical-text;
+    cursor: text;
     overflow-y: scroll;
     overflow-x: hidden;
     background: black;
     color: #eeeaee;
+}
+.body::selection, .body *::selection {
+    color: #333133;
+    background-color: #eeeaee   ;
 }
 
 @keyframes blinking {
@@ -120,4 +128,15 @@ a {
     outline: none;
     color: #eeeaee;
     width: 90%;
+}
+
+.wred {
+    color: #900
+}
+.wgreen {
+    color: #090
+}
+
+.va {
+    vertical-align: middle;
 }

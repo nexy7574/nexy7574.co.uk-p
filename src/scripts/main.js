@@ -1,3 +1,36 @@
+if(navigator.userAgent.indexOf("firefox")) {
+    const warningElement = document.createElement("div");
+    warningElement.innerHTML = `Warning: Firefox, as of version 120.0.1, does not support the CSS <code>:has</code>
+    pseudo-selector, so some features may not work as intended. You can go to <code>about:config</code> and 
+    toggle <code>layout.css.has-selector.enabled</code> to <code>true</code>, or use another browser.`;
+    warningElement.classList.add("wred");
+    document.querySelector(".body").appendChild(warningElement);
+    document.querySelector(".body").appendChild(document.querySelector("form"));
+}
+
+const _BD = new Date("2006-06-01T00:00:00");
+const _YO = () => {
+    const now = new Date();
+    const seconds_delta = (now - _BD) / 100;
+    const years = Math.round(seconds_delta / 31536000) / 10;
+    return years;
+}
+const __ABOUT = `Hello! I am Nexus. I am a ${_YO()} year old programming from England. I enjoy programming and gaming, 
+because I've had an interest in tech ever since I was a tiny little child, tearing apart any sort of tech I could to see what
+was inside it. As I was never a sports kind of person, I ended up liking gaming.\n\n
+Nowadays I write little tools on <a href="https://github.com/nexy7574" target="_blank" rel="noopener">my github</a> 
+for all to see, manage a homelab server, and study networking and cybersecurity. I am a big advocate for privacy, despite 
+still being deep in proprietaryville.`
+const __CONTACT = {
+    "Matrix": "https://go.nexy7574.co.uk/#/@nex:nexy7574.co.uk",
+    "Discord (server)": "https://discord.gg/TveBeG7",
+    // take this, low-effort email scraper bots
+    // Behold, my overly-complicated and inefficient and also probably ineffective
+    // email obfusctation
+    "Email (slow)": `mail${'to'}${':'}${atob('d2Vic2l0ZSsxODEyMjNA')}nexy7574.co.uk`,
+    "Session": ""
+}
+
 const COMMANDS = {
     'license': {
         'description': 'Displays license information (CC BY-NC-SA).',
@@ -29,7 +62,7 @@ const COMMANDS = {
     },
     'about': {
         'description': 'Shows you some basic information about me.',
-        'exec': () => {}
+        'exec': () => {return __ABOUT}
     },
     'experience': {
         'description': 'Effectictively displays a portfolio.',

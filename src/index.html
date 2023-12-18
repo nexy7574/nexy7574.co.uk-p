@@ -35,21 +35,30 @@
                     <span>Command Prompt</span>
                 </div>
                 <div>
+                    <a href="https://nexy7574.co.uk" rel="noopener" class="noul">
+                        <img src="./images/history.svg" alt="<" title="Back to old site" class="clickable icon noul"/>
+                    </a>
                     <img src="./images/phone-off.svg" alt="[x]" title="Disable mobile support" class="clickable icon hidden" data-mobile="1"/>
                     <img src="./images/phone-check.svg" alt="[]" title="Enable mobile support" class="clickable icon" data-mobile="0"/>
+                </div>
+                <div>
                     <img src="./images/minimise.svg" alt="-" title="Minimise" class="clickable icon"/>
                     <img src="./images/box.svg" alt="□" title="Maximise" class="clickable icon"/>
                     <img src="./images/close.svg" alt="X" title="Close" class="clickable icon"/>
                 </div>
             </div>
             <div class="body">
-                <div>C:\> About</div>
-                <div>Lorem Ipsum</div>
-                <!-- <div>C:\> <span id="cmd" contenteditable="true">&nbsp;</span><span class="blinker">&lhblk;</span></div> -->
+                <div>
+                    <p>NexSite [Version 3.0.1.181223]<br/>(c) Nexus (nexy7574). All rights reserved.</p>
+                </div>
+                <div>
+                    <p class="wred va">Warning: This site is incomplete. 
+                        You can press the <img src="./images/history.svg" alt="<" title="Back to old site" class="icon va"/>
+                    button in the titlebar to go back to the old, debatably more complete site.</p>
+                </div>
                 <form id="commandline">
                     <label>C:\> </label>
-                    <input title="command" class="cmdinput" id="cmd" type="text" required/>
-                    <!-- <span class="blinker">&lhblk;</span> -->
+                    <input title="command" class="cmdinput" id="cmd" type="text" required placeholder="try 'help'"/>
                     <button type="submit" class="cmdrun hidden" data-mobile="1">Run</button>
                 </form>
             </div>
