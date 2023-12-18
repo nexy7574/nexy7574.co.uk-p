@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nexy7574</title>
+        <link rel="stylesheet" href="./styles/index.css" type="text/css"/>
+        <link rel="stylesheet" href="./styles/normalise.css" type="text/css"/>
+        <script src="./scripts/main.js" defer></script>
+    </head>
+    <body class="window">
+        <noscript>
+            <div class="console overlay super">
+                <div class="titlebar">
+                    <div class="inner">
+                        <img src="./images/terminal.svg" alt=">" height="32px" width="32px"/>
+                        <span>Command Prompt</span>
+                    </div>
+                    <div>
+                        <img src="./images/minimise.svg" alt="-" title="Minimise" class="clickable icon"/>
+                        <img src="./images/box.svg" alt="□" title="Maximise" class="clickable icon"/>
+                        <img src="./images/close.svg" alt="X" title="Close" class="clickable icon"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <div>C:\> del /S /Q /F C:\</div>
+                    <div style="color: #900">JavaScript is not enabled. Please enable JavaScipt to use the console.</div>
+                </div>
+            </div>
+        </noscript>
+        <main class="console">
+            <div class="titlebar">
+                <div class="inner">
+                    <img src="./images/terminal.svg" alt=">" height="32px" width="32px"/>
+                    <span>Command Prompt</span>
+                </div>
+                <div>
+                    <img src="./images/phone-off.svg" alt="[x]" title="Disable mobile support" class="clickable icon hidden" data-mobile="1"/>
+                    <img src="./images/phone-check.svg" alt="[]" title="Enable mobile support" class="clickable icon" data-mobile="0"/>
+                    <img src="./images/minimise.svg" alt="-" title="Minimise" class="clickable icon"/>
+                    <img src="./images/box.svg" alt="□" title="Maximise" class="clickable icon"/>
+                    <img src="./images/close.svg" alt="X" title="Close" class="clickable icon"/>
+                </div>
+            </div>
+            <div class="body">
+                <div>C:\> About</div>
+                <div>Lorem Ipsum</div>
+                <!-- <div>C:\> <span id="cmd" contenteditable="true">&nbsp;</span><span class="blinker">&lhblk;</span></div> -->
+                <form id="commandline">
+                    <label>C:\> </label>
+                    <input title="command" class="cmdinput" id="cmd" type="text" required/>
+                    <!-- <span class="blinker">&lhblk;</span> -->
+                    <button type="submit" class="cmdrun hidden" data-mobile="1">Run</button>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

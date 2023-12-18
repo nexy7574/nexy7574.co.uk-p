@@ -1,0 +1,123 @@
+@font-face {
+    font-family: Menlo;
+    src: url('../fonts/Menlo-Regular.woff');
+}
+
+@font-face {
+    font-family: 'Ubuntu Mono';
+    src: url('../fonts/UbuntuMono-Regular.woff');
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.clickable {
+    cursor: pointer
+}
+
+.window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 1rem;
+}
+
+.console {
+    font-family: 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    height: 80%;
+    width: 75%;
+    max-width: 1280px;
+    max-height: 720px;
+    min-width: 384px;
+    min-height: 216px;
+    overflow: unset;
+    background: #111;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 5px 5px 10px #333;
+    z-index: 0;
+}
+.console .overlay {
+    z-index: 1;
+    position: absolute;
+    top: 10;
+    left: 10;
+}
+.console .overlay .super {
+    z-index: 100;
+}
+
+.console:has(.maximised) {
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.console:has(.minimised) {
+    max-width: 384px;
+    max-height: 216px;
+}
+
+.console:has(.minimised) .body {
+    display: none;
+}
+
+.icon path{
+    width: 32px;
+    height: 32px;
+}
+
+.console .titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    align-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid #aaa
+}
+
+.titlebar .inner {
+    display: flex;
+    align-items: center;
+}
+
+.body {
+    cursor: vertical-text;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: black;
+    color: #eeeaee;
+}
+
+@keyframes blinking {
+    to {visibility: hidden;}
+}
+
+a {
+    color: #eeeaee;
+    text-decoration: underline;
+}
+
+.blinker {
+    animation: 1500ms steps(2, start) infinite blinking;
+    font-weight: bolder
+}
+
+.cmdinput {
+    border: none;
+    background: transparent;
+    outline: none;
+    color: #eeeaee;
+    width: 90%;
+}
