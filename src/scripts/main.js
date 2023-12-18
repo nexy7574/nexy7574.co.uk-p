@@ -69,7 +69,11 @@ const COMMANDS = {
     },
     'experience': {
         'description': 'Effectictively displays a portfolio.',
-        'exec': () => {}
+        'exec': () => {
+            const url = "https://github.com/nexy7574";
+            window.open(url, "_blank");
+            return `You can see all of my works here: <a href="${url}" target="_blank" rel="noopener">${url}</a>`
+        }
     },
     "cls": {
         'description': 'Clears the console.',
