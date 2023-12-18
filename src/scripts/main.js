@@ -1,11 +1,14 @@
-if(navigator.userAgent.indexOf("firefox")) {
+const ROOT = document.querySelector(".body");
+const FORM = document.querySelector("form");
+
+if(navigator.userAgent.includes("firefox")) {
     const warningElement = document.createElement("div");
     warningElement.innerHTML = `Warning: Firefox, as of version 120.0.1, does not support the CSS <code>:has</code>
     pseudo-selector, so some features may not work as intended. You can go to <code>about:config</code> and 
     toggle <code>layout.css.has-selector.enabled</code> to <code>true</code>, or use another browser.`;
     warningElement.classList.add("wred");
-    document.querySelector(".body").appendChild(warningElement);
-    document.querySelector(".body").appendChild(document.querySelector("form"));
+    ROOT.appendChild(warningElement);
+    ROOT.appendChild(FORM);
 }
 
 const _BD = new Date("2006-06-01T00:00:00");
@@ -67,6 +70,15 @@ const COMMANDS = {
     'experience': {
         'description': 'Effectictively displays a portfolio.',
         'exec': () => {}
+    },
+    "cls": {
+        'description': 'Clears the console.',
+        'exec': () => {
+            for(let element of ROOT.children) {
+                element.hidden = true;
+            };
+            FORM.hidden = false;
+        }
     }
 };
 let MOBILE_ENABLED = false;
