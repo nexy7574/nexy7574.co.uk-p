@@ -47,7 +47,7 @@ if(window.mobileCheck()) {
 const COMMANDS = {
     'license': {
         'description': 'Displays license information (CC BY-NC-SA).',
-        'exec': (input, output) => {
+        'exec': () => {
             return `This website is licensed under CC BY-NC-SA (Creative Commons
                 Attribution-NonCommercial-ShareAlike 4.0 International). See 
                 <a target="_blank" href="./LICENSE.txt">LICENSE.txt</a> for the full license.`
