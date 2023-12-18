@@ -26,12 +26,13 @@ for all to see, manage a homelab server, and study networking and cybersecurity.
 still being deep in proprietaryville.`
 const __CONTACT = {
     "Matrix": "https://go.nexy7574.co.uk/#/@nex:nexy7574.co.uk",
+    "Session": "05f549013eb0df03250274a7d678489a1d94bf7adad2f36cdea259dd93f4486470",
     "Discord (server)": "https://discord.gg/TveBeG7",
     // take this, low-effort email scraper bots
     // Behold, my overly-complicated and inefficient and also probably ineffective
     // email obfusctation
     "Email (slow)": `mail${'to'}${':'}${atob('d2Vic2l0ZSsxODEyMjNA')}nexy7574.co.uk`,
-    "Session": ""
+    "Signal": "Ask via one of the other methods first."
 }
 
 // Nicked from https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
@@ -92,6 +93,23 @@ const COMMANDS = {
                 element.hidden = true;
             };
             FORM.hidden = false;
+        }
+    },
+    "contact": {
+        "description": "Gives you links to contact me.",
+        "exec": () => {
+            let lines = [];
+            for(let key of Object.keys(__CONTACT)) {
+                const v = __CONTACT[key];
+                let elem;
+                if(!v.startsWith("http") && !v.startsWith("mail")) {
+                    elem = `<p>${key}: ${v}</p>`
+                } else {
+                    elem = `<p>${key}: <a href="${v}" target="_blank" rel="noopener">${v}</a></p>`
+                }
+                lines.push(elem);
+            };
+            return lines.join("")
         }
     }
 };
