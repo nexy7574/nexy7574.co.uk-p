@@ -34,6 +34,30 @@ const __CONTACT = {
     "Email (slow)": `mail${'to'}${':'}${atob('d2Vic2l0ZSsxODEyMjNA')}nexy7574.co.uk`,
     "Signal": "Ask via one of the other methods first."
 }
+const __BATFB = async () => {return {level: 999}}
+const EPOCH = new Date("2023-12-19T10:21:00");
+const __NEOFETCH = `
+        #####           ${window.location.port}@${window.location.hostname}
+       #######          -----------------------
+       ##O#O##          OS: ${navigator.platform || navigator.oscpu || 'Operating System'}
+       #######          Kernel: 6.6.7-arch1-1 
+     ###########        Uptime: ${Math.floor((Date.now() - EPOCH) / 1000)} seconds
+    #############       Packages: 2048 (pacman, flatpak) 
+   ###############      Shell: ${navigator.product} ${navigator.productSub}
+   ################     DE: ${navigator.appName || 'Browser'} ${navigator.appVersion || new Date().toUTCString()}
+  #################     WM: Web
+#####################   Theme: [Dark]
+#####################   Icons: [Dark]
+  #################     Terminal: ${navigator.appCodeName || 'Webpage'} 
+                        CPU: 23rd Gen CPU (${navigator.hardwareConcurrency}) @ 6.9GHz [420.0°C] 
+                        GPU: AMDDIA GeDon RXX 7050ti Mobile XTX3D 
+                        Memory: 6.9GiB / 420.0GiB 
+                        GPU Driver: null
+                        CPU Usage: -100%
+                        Disk (/dev/mapper/cryptroot): 1b / 100P (52%) 
+                        Local IP: 10.0.0.110 
+                        Locale: ${navigator.language}.UTF-8
+`
 
 // Nicked from https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 window.mobileCheck = function() {
@@ -123,6 +147,10 @@ const COMMANDS = {
             return `Opening <a href='https://status.nexy7574.co.uk' target='_blank' rel='noopener'>https://status.nexy7574.co.uk</a> (this
             feature is not implemented yet, however there's still the status monitor)`
         }
+    },
+    "neofetch": {
+        "description": "neofetch",
+        "exec": () => `<pre>${__NEOFETCH}</pre>`
     }
 };
 let MOBILE_ENABLED = false;
