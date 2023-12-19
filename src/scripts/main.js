@@ -54,7 +54,7 @@ const __NEOFETCH = `
                         Memory: 6.9GiB / 420.0GiB 
                         GPU Driver: null
                         CPU Usage: -100%
-                        Disk (/dev/mapper/cryptroot): 1b / 100P (52%) 
+                        Disk (/dev/mapper/cryptroot): 1b / 100P (0%) 
                         Local IP: 10.0.0.110 
                         Locale: ${navigator.language}.UTF-8
 `
