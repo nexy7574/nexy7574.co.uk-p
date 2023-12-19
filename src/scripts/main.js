@@ -150,11 +150,11 @@ const COMMANDS = {
             try {
                 let response = await fetch("https://matrix.nexy7574.co.uk/api/status");
                 const json = await response.json();
+                document.getElementById("blinker").classList.add("hidden");
                 if (json.online === true) {
                     output.innerHTML += "<span>NexBox/Matrix is <span class='wgreen'>ONLINE</span>.</span><br>"
                 }
             } catch (e) {
-                // window.open("https://status.nexy7574.co.uk", "_blank");
                 output.innerHTML += "<span>NexBox/Matrix is <span class='wred'>OFFLINE</span></span><br>"
             }
 
@@ -279,7 +279,9 @@ async function commandWrapper(e) {
     const blinkerElement = document.createElement("span");
     blinkerElement.classList.add("blinker");
     blinkerElement.innerHTML = '&lhblk;';
+    blinkerElement.id = "blinker";
     body.appendChild(blinkerElement);
+    body.appendChild(responseElement);
 
     let flag = 0;
     for(let command_name of Object.keys(COMMANDS)) {
@@ -299,9 +301,6 @@ async function commandWrapper(e) {
     if(!responseElement.innerHTML) {
         // No response, blank line.
         responseElement.remove();
-    }
-    else {
-        body.appendChild(responseElement);
     }
     blinkerElement.remove();
     cmdElement.value = null;
