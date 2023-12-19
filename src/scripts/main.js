@@ -138,14 +138,38 @@ const COMMANDS = {
     },
     "gpg": {
         "description": "Gives you my GPG key.",
-        "exec": () => "178E7758DAEED8D64F6E17870FA334385D0B689F (available on Ubuntu keyserver)"
+        "exec": () => {
+            const key = "178E7758DAEED8D64F6E17870FA334385D0B689F"
+            // todo: shorten this
+            return `${key} (available on keyserver.ubuntu.com)`
+        }
     },
     "status": {
         "description": "Checks a few services for a cursory uptime check.",
-        "exec": (input, output) => {
-            window.open("https://status.nexy7574.co.uk", "_blank");
-            return `Opening <a href='https://status.nexy7574.co.uk' target='_blank' rel='noopener'>https://status.nexy7574.co.uk</a> (this
-            feature is not implemented yet, however there's still the status monitor)`
+        "exec": async (_, output) => {
+            try {
+                let response = await fetch("https://matrix.nexy7574.co.uk/api/status");
+                const json = await response.json();
+                if (json.online === true) {
+                    output.innerHTML += "<span>NexBox/Matrix is <span class='wgreen'>ONLINE</span>.</span><br>"
+                }
+            } catch (e) {
+                // window.open("https://status.nexy7574.co.uk", "_blank");
+                output.innerHTML += "<span>NexBox/Matrix is <span class='wred'>OFFLINE</span></span><br>"
+            }
+
+            try {
+                let response = await fetch("https://droplet.nexy7574.co.uk/jimmy/ping");
+                const json = await response.json();
+                if (json.online === true) {
+                    output.innerHTML += "<span>Droplet is <span class='wgreen'>ONLINE</span>.</span><br>"
+                }
+            } catch (e) {
+                // window.open("https://status.nexy7574.co.uk", "_blank");
+                output.innerHTML += "<span>Droplet is <span class='wred'>OFFLINE</span></span><br>"
+            }
+
+            output.innerHTML += "<p><a href='https://status.nexy7574.co.uk' target='_blank' rel='noopener'>See full status here.</a></p>"
         }
     },
     "neofetch": {
@@ -241,19 +265,26 @@ function toggleMobileSupport(e) {
 document.querySelector("img[title='Enable mobile support']").addEventListener("click", toggleMobileSupport);
 document.querySelector("img[title='Disable mobile support']").addEventListener("click", toggleMobileSupport);
 
-function commandWrapper(e) {
+async function commandWrapper(e) {
     console.debug(e);
+    let body = document.querySelector("main > .body");
     e.preventDefault();
     // remove the blinker from the current prompt and make it read-only
-    const cmdElement = e.target.children[1];
+    const cmdElement = e.target.cmd;
     const inputResponseElement = document.createElement("div");
     inputResponseElement.textContent = `C:\\> ${cmdElement.value}`
+    body.appendChild(inputResponseElement);
+    e.target.hidden = true;
     const responseElement = document.createElement("div");
+    const blinkerElement = document.createElement("span");
+    blinkerElement.classList.add("blinker");
+    blinkerElement.innerHTML = '&lhblk;';
+    body.appendChild(blinkerElement);
 
     let flag = 0;
     for(let command_name of Object.keys(COMMANDS)) {
         if(command_name == cmdElement.value.toLocaleLowerCase()) {
-            let content = COMMANDS[command_name].exec(cmdElement, responseElement);
+            let content = await Promise.resolve(COMMANDS[command_name].exec(cmdElement, responseElement));
             if(content) {
                 responseElement.innerHTML = responseElement.innerHTML || ""
                 responseElement.innerHTML += content
@@ -265,8 +296,6 @@ function commandWrapper(e) {
     if(flag==0) {
         responseElement.textContent = `'${cmdElement.value.toLocaleLowerCase()}' is not recognized as an internal or external command, operable program or batch file.`;
     }
-    let body = document.querySelector("main > .body");
-    body.appendChild(inputResponseElement);
     if(!responseElement.innerHTML) {
         // No response, blank line.
         responseElement.remove();
@@ -274,7 +303,9 @@ function commandWrapper(e) {
     else {
         body.appendChild(responseElement);
     }
+    blinkerElement.remove();
     cmdElement.value = null;
+    e.target.hidden = false;
     body.appendChild(document.createElement("br"))
     body.appendChild(e.target)
     cmdElement.focus();
