@@ -37,7 +37,7 @@ const __CONTACT = {
 const __BATFB = async () => {return {level: 999}}
 const EPOCH = new Date("2023-12-19T10:21:00");
 const __NEOFETCH = `
-        #####           ${window.location.port}@${window.location.hostname}
+        #####           ${window.location.port || 'user'}@${window.location.hostname}
        #######          -----------------------
        ##O#O##          OS: ${navigator.platform || navigator.oscpu || 'Operating System'}
        #######          Kernel: 6.6.7-arch1-1 
