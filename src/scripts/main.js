@@ -69,6 +69,21 @@ if(window.mobileCheck()) {
     document.querySelector("#mobile-warning").hidden = false;
 }
 
+async function loadNicerBackground() {
+    while (let i=0; i<10; i++) {
+        try {
+            let response = await fetch("./images/background.jpeg");
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            document.style.backgroundImage = `url(${url})`;
+            return;
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+};
+
 const COMMANDS = {
     'license': {
         'description': 'Displays license information (CC BY-NC-SA).',
