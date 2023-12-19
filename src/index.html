@@ -10,7 +10,8 @@
     </head>
     <body class="window">
         <noscript>
-            <div class="console overlay super">
+            <style>.needs-js{z-index:-100;opacity: 10%;};body.window main.console {display:block!important};</style>
+            <div class="console overlay">
                 <div class="titlebar">
                     <div class="inner">
                         <img src="./images/terminal.svg" alt=">" height="32px" width="32px"/>
@@ -28,7 +29,7 @@
                 </div>
             </div>
         </noscript>
-        <main class="console">
+        <main class="console needs-js">
             <div class="titlebar">
                 <div class="inner">
                     <img src="./images/terminal.svg" alt=">" height="32px" width="32px"/>
