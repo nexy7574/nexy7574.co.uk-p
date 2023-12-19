@@ -70,7 +70,7 @@ if(window.mobileCheck()) {
 }
 
 async function loadNicerBackground() {
-    while (let i=0; i<10; i++) {
+    for (let i=0; i<10; i++) {
         try {
             let response = await fetch("./images/background.jpeg");
             const blob = await response.blob();
@@ -83,6 +83,8 @@ async function loadNicerBackground() {
         }
     }
 };
+
+loadNicerBackground().catch(console.error)
 
 const COMMANDS = {
     'license': {
