@@ -283,9 +283,9 @@ document.querySelector("img[title='Enable mobile support']").addEventListener("c
 document.querySelector("img[title='Disable mobile support']").addEventListener("click", toggleMobileSupport);
 
 async function commandWrapper(e) {
+    e.preventDefault();
     console.debug(e);
     let body = document.querySelector("main > .body");
-    e.preventDefault();
     // remove the blinker from the current prompt and make it read-only
     const cmdElement = e.target.cmd;
     const inputResponseElement = document.createElement("div");
@@ -325,6 +325,7 @@ async function commandWrapper(e) {
     body.appendChild(document.createElement("br"))
     body.appendChild(e.target)
     cmdElement.focus();
+    return false;  // stop a refresh on iOS devices
 }
 let KEY_SEQUENCE = [];
 
