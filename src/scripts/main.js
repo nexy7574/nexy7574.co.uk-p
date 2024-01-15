@@ -72,7 +72,7 @@ if(window.mobileCheck()) {
 async function loadNicerBackground() {
     for (var i=0; i<10; i++) {
         try {
-            var response = await fetch("./images/background.jpeg");
+            var response = await fetch("./images/background.heic");
             const blob = await response.blob();
             const url = URL.createObjectURL(blob);
             if(!document||!document.style){return;}  // safari smh
