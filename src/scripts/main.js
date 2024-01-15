@@ -354,3 +354,5 @@ function toggleTransparent(e) {
 document.addEventListener("keydown", (e) => {toggleTransparent(e)});
 
 document.getElementById("commandline").addEventListener("submit", commandWrapper, {capture: true, passive: false});
+document.getElementById("beacon").textContent = "Runtime loaded.";
+document.getElementById("beacon").style.display = "block";
