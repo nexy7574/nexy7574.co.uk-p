@@ -61,7 +61,7 @@ const __NEOFETCH = `
 
 // Nicked from https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 window.mobileCheck = function() {
-    let check = false;
+    var check = false;
     (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
     return check;
 };
@@ -70,9 +70,9 @@ if(window.mobileCheck()) {
 }
 
 async function loadNicerBackground() {
-    for (let i=0; i<10; i++) {
+    for (var i=0; i<10; i++) {
         try {
-            let response = await fetch("./images/background.jpeg");
+            var response = await fetch("./images/background.jpeg");
             const blob = await response.blob();
             const url = URL.createObjectURL(blob);
             document.style.backgroundImage = `url(${url})`;
@@ -98,10 +98,10 @@ const COMMANDS = {
     'help': {
         'description': 'Shows this command.',
         'exec': () => {
-            let result = [];
-            for (let key of Object.keys(COMMANDS)) {
-                let spaces = 13 - key.length;
-                let space_chars = '&nbsp;'.repeat(spaces);
+            var result = [];
+            for (var key of Object.keys(COMMANDS)) {
+                var spaces = 13 - key.length;
+                var space_chars = '&nbsp;'.repeat(spaces);
                 result.push(`${key}${space_chars}${COMMANDS[key].description}`)
             }
             return result.join('<br>');
@@ -130,7 +130,7 @@ const COMMANDS = {
     "cls": {
         'description': 'Clears the console.',
         'exec': () => {
-            for(let element of ROOT.children) {
+            for(var element of ROOT.children) {
                 element.hidden = true;
             };
             FORM.hidden = false;
@@ -139,10 +139,10 @@ const COMMANDS = {
     "contact": {
         "description": "Gives you links to contact me.",
         "exec": () => {
-            let lines = [];
-            for(let key of Object.keys(__CONTACT)) {
+            var lines = [];
+            for(var key of Object.keys(__CONTACT)) {
                 const v = __CONTACT[key];
-                let elem;
+                var elem;
                 if(!v.startsWith("http") && !v.startsWith("mail")) {
                     elem = `<p>${key}: ${v}</p>`
                 } else {
@@ -165,7 +165,7 @@ const COMMANDS = {
         "description": "Checks a few services for a cursory uptime check.",
         "exec": async (_, output) => {
             try {
-                let response = await fetch("https://matrix.nexy7574.co.uk/api/status");
+                var response = await fetch("https://matrix.nexy7574.co.uk/api/status");
                 const json = await response.json();
                 document.getElementById("blinker").classList.add("hidden");
                 if (json.online === true) {
@@ -176,7 +176,7 @@ const COMMANDS = {
             }
 
             try {
-                let response = await fetch("https://droplet.nexy7574.co.uk/jimmy/ping");
+                var response = await fetch("https://droplet.nexy7574.co.uk/jimmy/ping");
                 const json = await response.json();
                 if (json.online === true) {
                     output.innerHTML += "<span>Droplet is <span class='wgreen'>ONLINE</span>.</span><br>"
@@ -194,7 +194,7 @@ const COMMANDS = {
         "exec": () => `<pre>${__NEOFETCH}</pre>`
     }
 };
-let MOBILE_ENABLED = false;
+var MOBILE_ENABLED = false;
 
 function closeWindow(e) {
     console.debug("Closing: %s", e);
@@ -239,13 +239,13 @@ function maximiseWindow(e) {
     };
 };
 
-for(let element of document.querySelectorAll("img[title='Minimise']")) {
+for(var element of document.querySelectorAll("img[title='Minimise']")) {
     element.addEventListener("click", minimiseWindow);
 }
-for(let element of document.querySelectorAll("img[title='Maximise']")) {
+for(var element of document.querySelectorAll("img[title='Maximise']")) {
     element.addEventListener("click", maximiseWindow);
 }
-for(let element of document.querySelectorAll("img[title='Close']")) {
+for(var element of document.querySelectorAll("img[title='Close']")) {
     element.addEventListener("click", closeWindow);
 }
 
@@ -266,8 +266,8 @@ function createCommandLineElement() {
 function toggleMobileSupport(e) {
     MOBILE_ENABLED = !MOBILE_ENABLED
     const elements = document.querySelectorAll("*[data-mobile]");
-    for(let element of elements) {
-        let supports = element.dataset.mobile == "1";
+    for(var element of elements) {
+        var supports = element.dataset.mobile == "1";
         console.debug("%s == '1': %s", element.dataset.mobile, supports)
         if(supports == MOBILE_ENABLED) {
             element.classList.remove("hidden");
@@ -284,8 +284,9 @@ document.querySelector("img[title='Disable mobile support']").addEventListener("
 
 async function commandWrapper(e) {
     e.preventDefault();
+    e.stopPropagation();
     console.debug(e);
-    let body = document.querySelector("main > .body");
+    var body = document.querySelector("main > .body");
     // remove the blinker from the current prompt and make it read-only
     const cmdElement = e.target.cmd;
     const inputResponseElement = document.createElement("div");
@@ -300,10 +301,10 @@ async function commandWrapper(e) {
     body.appendChild(blinkerElement);
     body.appendChild(responseElement);
 
-    let flag = 0;
-    for(let command_name of Object.keys(COMMANDS)) {
+    var flag = 0;
+    for(var command_name of Object.keys(COMMANDS)) {
         if(command_name == cmdElement.value.toLocaleLowerCase()) {
-            let content = await Promise.resolve(COMMANDS[command_name].exec(cmdElement, responseElement));
+            var content = await Promise.resolve(COMMANDS[command_name].exec(cmdElement, responseElement));
             if(content) {
                 responseElement.innerHTML = responseElement.innerHTML || ""
                 responseElement.innerHTML += content
@@ -327,7 +328,7 @@ async function commandWrapper(e) {
     cmdElement.focus();
     return false;  // stop a refresh on iOS devices
 }
-let KEY_SEQUENCE = [];
+var KEY_SEQUENCE = [];
 
 function toggleTransparentMode() {
     if(ROOT.classList.contains("transparent")) {
@@ -352,4 +353,4 @@ function toggleTransparent(e) {
 }
 document.addEventListener("keydown", (e) => {toggleTransparent(e)});
 
-document.getElementById("commandline").onsubmit = commandWrapper;
+document.getElementById("commandline").addEventListener("submit", commandWrapper, {capture: true, passive: false});
