@@ -6,7 +6,6 @@
         <title>nexy7574</title>
         <link rel="stylesheet" href="./styles/index.css" type="text/css"/>
         <link rel="stylesheet" href="./styles/normalise.css" type="text/css"/>
-        <script src="./scripts/main.js" onerror="(e)=>{alert('Error loading runtime: ' + e);window.location.reload(true)}" defer></script>
     </head>
     <body class="window">
         <noscript>
@@ -58,7 +57,7 @@
                         You can press the <img src="./images/history.svg" alt="<" title="Back to old site" class="icon va"/>
                     button in the titlebar to go back to the old, debatably more complete site.</p>
                 </div>
-                <div class="wred" hidden="true">
+                <div class="wred" hidden="true" id="mobile-warning">
                     <p>
                         Warning: This site is not optimised for mobile usage. While it will still work
                         (even better if you press the little phone button at the top of the titlebar),
@@ -73,4 +72,6 @@
             </div>
         </main>
     </body>
+
+    <script src="./scripts/main.js"></script>
 </html>

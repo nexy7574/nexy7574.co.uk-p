@@ -66,7 +66,7 @@ window.mobileCheck = function() {
     return check;
 };
 if(window.mobileCheck()) {
-    document.querySelector("#mobile-warning").hidden = false;
+    document.addEventListener("DOMContentLoaded", () => {document.getElementById("mobile-warning").hidden = false})
 }
 
 async function loadNicerBackground() {
@@ -75,6 +75,7 @@ async function loadNicerBackground() {
             var response = await fetch("./images/background.jpeg");
             const blob = await response.blob();
             const url = URL.createObjectURL(blob);
+            if(!document||!document.style){return;}  // safari smh
             document.style.backgroundImage = `url(${url})`;
             return;
         }
@@ -351,8 +352,13 @@ function toggleTransparent(e) {
         toggleTransparentMode();
     }
 }
-document.addEventListener("keydown", (e) => {toggleTransparent(e)});
 
-document.getElementById("commandline").addEventListener("submit", commandWrapper, {capture: true, passive: false});
-document.getElementById("beacon").textContent = "Runtime loaded.";
-document.getElementById("beacon").style.display = "block";
+function onDOMLoaded() {
+    document.addEventListener("keydown", (e) => {toggleTransparent(e)});
+
+    document.getElementById("commandline").addEventListener("submit", commandWrapper, {capture: true, passive: false});
+    document.getElementById("beacon").textContent = "Runtime loaded.";
+    document.getElementById("beacon").style.display = "block";
+};
+
+document.addEventListener("DOMContentLoaded", onDOMLoaded);
