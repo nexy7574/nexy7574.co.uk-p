@@ -1,16 +1,6 @@
 const ROOT = document.querySelector(".body");
 const FORM = document.querySelector("form");
 
-if(navigator.userAgent.includes("firefox")===true) {
-    const warningElement = document.createElement("div");
-    warningElement.innerHTML = `Warning: Firefox, as of version 120.0.1, does not support the CSS <code>:has</code>
-    pseudo-selector, so some features may not work as intended. You can go to <code>about:config</code> and 
-    toggle <code>layout.css.has-selector.enabled</code> to <code>true</code>, or use another browser.`;
-    warningElement.classList.add("wred");
-    ROOT.appendChild(warningElement);
-    ROOT.appendChild(FORM);
-}
-
 const _BD = new Date("2006-06-01T00:00:00");
 const _YO = () => {
     const now = new Date();
@@ -39,10 +29,10 @@ const EPOCH = new Date("2023-12-19T10:21:00");
 const __NEOFETCH = `
         #####           ${window.location.port || 'user'}@${window.location.hostname}
        #######          -----------------------
-       ##O#O##          OS: ${navigator.platform || navigator.oscpu || 'Operating System'}
-       #######          Kernel: 6.6.7-arch1-1 
+       ##O#O##          OS: ${navigator.platform || navigator.oscpu || navigator.vendor || 'Mozilla'}
+       #######          Kernel: 6.6.6-javascipt
      ###########        Uptime: ${Math.floor((Date.now() - EPOCH) / 1000)} seconds
-    #############       Packages: 2048 (pacman, flatpak) 
+    #############       Packages: 2048 (pacman, flatpak), -9999 (snap)
    ###############      Shell: ${navigator.product} ${navigator.productSub}
    ################     DE: ${navigator.appName || 'Browser'} ${navigator.appVersion || new Date().toUTCString()}
   #################     WM: Web
@@ -72,20 +62,23 @@ if(window.mobileCheck()) {
 async function loadNicerBackground() {
     for (var i=0; i<10; i++) {
         try {
-            var response = await fetch("./images/background.heic");
-            const blob = await response.blob();
-            const url = URL.createObjectURL(blob);
-            if(!document||!document.style){return;}  // safari smh
-            document.style.backgroundImage = `url(${url})`;
+            console.debug(`Lazy-loading high-quality background (try ${i})...`)
+            var response = await fetch("./images/background.avif");
+            for await (const chunk of response.body) {
+                console.debug("Read %d bytes in stream.", chunk.length);
+            }
+            console.debug("Lazy-loaded HQ background. Setting as background.");
+            if(!document.body){console.warn("No document."); return;}
+            document.body.parentElement.style.backgroundImage = `url(./images/background.avif)`;
+            console.debug("Set high-quality background.")
             return;
         }
         catch (e) {
             console.error(e);
         }
+        console.error("Failed to lazy-load high-quality background.")
     }
 };
-
-loadNicerBackground().catch(console.error)
 
 const COMMANDS = {
     'license': {
@@ -200,11 +193,28 @@ var MOBILE_ENABLED = false;
 function closeWindow(e) {
     console.debug("Closing: %s", e);
     const consoleRoot = e.target.parentElement.parentElement.parentElement;
+
+    // alert("Are you do have the stupid?");
     if(consoleRoot.classList.contains("hidden")) {
         console.debug("%s is already hidden.", consoleRoot);
     } else {
         consoleRoot.classList.add("hidden");
     };
+
+    let dingElement = document.createElement("audio");
+    let source = document.createElement("source");
+    source.src = "./images/ding.ogg";
+    source.type = "audio/ogg";
+    dingElement.appendChild(source);
+    dingElement.hidden = true;
+    document.body.appendChild(dingElement);
+    setTimeout(
+        () => {
+            document.body.parentElement.style.backgroundImage = "url(./images/bsod.jpeg)";
+            dingElement.play();
+        }, 
+        Math.random() * 1000
+    );
 };
 
 function minimiseWindow(e) {
@@ -354,11 +364,14 @@ function toggleTransparent(e) {
 }
 
 function onDOMLoaded() {
+    document.body.parentElement.style.backgroundImage = "url(./images/background.webp)";
     document.addEventListener("keydown", (e) => {toggleTransparent(e)});
 
     document.getElementById("commandline").addEventListener("submit", commandWrapper, {capture: true, passive: false});
     document.getElementById("beacon").textContent = "Runtime loaded.";
     document.getElementById("beacon").style.display = "block";
+
+    loadNicerBackground().catch(console.error)
 };
 
 document.addEventListener("DOMContentLoaded", onDOMLoaded);
