@@ -118,7 +118,8 @@ const COMMANDS = {
         'exec': () => {
             const url = "https://github.com/nexy7574";
             window.open(url, "_blank");
-            return `You can see all of my works here: <a href="${url}" target="_blank" rel="noopener">${url}</a>`
+            return `You can see all of my works here: <a href="${url}" target="_blank" rel="noopener">${url}</a><br/>
+                    You can also find my git mirror for important projects <a href="https://git.i-am.nexus/explore/repos" rel="noopener" target="_blank">here</a>`
         }
     },
     "cls": {
@@ -152,7 +153,7 @@ const COMMANDS = {
         "exec": () => {
             const key = "178E7758DAEED8D64F6E17870FA334385D0B689F"
             // todo: shorten this
-            return `${key} (available on keyserver.ubuntu.com)`
+            return `${key} (available on keyserver.ubuntu.com, or by <a href="./files/nexy7574.gpg" target="_blank" download>direct download here</a>)`
         }
     },
     "status": {
@@ -169,18 +170,18 @@ const COMMANDS = {
                 output.innerHTML += "<span>NexBox/Matrix is <span class='wred'>OFFLINE</span></span><br>"
             }
 
-            try {
-                var response = await fetch("https://droplet.nexy7574.co.uk/jimmy/ping");
-                const json = await response.json();
-                if (json.online === true) {
-                    output.innerHTML += "<span>Droplet is <span class='wgreen'>ONLINE</span>.</span><br>"
-                }
-            } catch (e) {
-                // window.open("https://status.nexy7574.co.uk", "_blank");
-                output.innerHTML += "<span>Droplet is <span class='wred'>OFFLINE</span></span><br>"
-            }
+            // try {
+            //     var response = await fetch("https://droplet.nexy7574.co.uk/jimmy/ping");
+            //     const json = await response.json();
+            //     if (json.online === true) {
+            //         output.innerHTML += "<span>Droplet is <span class='wgreen'>ONLINE</span>.</span><br>"
+            //     }
+            // } catch (e) {
+            //     // window.open("https://status.nexy7574.co.uk", "_blank");
+            //     output.innerHTML += "<span>Droplet is <span class='wred'>OFFLINE</span></span><br>"
+            // }
 
-            output.innerHTML += "<p><a href='https://status.nexy7574.co.uk' target='_blank' rel='noopener'>See full status here.</a></p>"
+            // output.innerHTML += "<p><a href='https://status.nexy7574.co.uk' target='_blank' rel='noopener'>See full status here.</a></p>"
         }
     },
     "neofetch": {
@@ -203,7 +204,7 @@ function closeWindow(e) {
 
     let dingElement = document.createElement("audio");
     let source = document.createElement("source");
-    source.src = "./images/ding.ogg";
+    source.src = "./sound/ding.ogg";
     source.type = "audio/ogg";
     let source2 = document.createElement("source");
     source2.src = "./images/ding.m4a";
