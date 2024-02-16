@@ -207,7 +207,11 @@ function closeWindow(e) {
     let source = document.createElement("source");
     source.src = "./sound/ding.ogg";
     source.type = "audio/ogg";
+    let source2 = document.createElement("source");
+    source2.src = "./images/ding.m4a";
+    source.type = "audio/mp4";
     dingElement.appendChild(source);
+    dingElement.appendChild(source2);
     dingElement.hidden = true;
     document.body.appendChild(dingElement);
     setTimeout(
