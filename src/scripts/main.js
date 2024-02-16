@@ -190,6 +190,7 @@ const COMMANDS = {
     }
 };
 var MOBILE_ENABLED = false;
+var DIRECTORY = "C:\\";
 
 function closeWindow(e) {
     console.debug("Closing: %s", e);
@@ -372,7 +373,16 @@ function onDOMLoaded() {
     document.getElementById("beacon").textContent = "Runtime loaded.";
     document.getElementById("beacon").style.display = "block";
 
-    loadNicerBackground().catch(console.error)
+    loadNicerBackground().catch(console.error);
+
+    if (window.location.hash.length > 1) {
+        let _cmd = window.location.hash.slice(1);
+        for (let __command of _cmd.split(";")) {
+            document.getElementById("cmd").value = __command;
+            document.getElementById("run").click();
+        };
+        window.location.hash = "";
+    }
 };
 
 document.addEventListener("DOMContentLoaded", onDOMLoaded);
