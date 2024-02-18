@@ -153,7 +153,8 @@ const COMMANDS = {
         "exec": () => {
             const key = "178E7758DAEED8D64F6E17870FA334385D0B689F"
             // todo: shorten this
-            return `${key} (available on keyserver.ubuntu.com, or by <a href="./files/nexy7574.gpg" target="_blank" download>direct download here</a>)`
+            return `${key} (available on keyserver.ubuntu.com, or by <a href="./files/nexy7574.gpg" target="_blank" download>direct download here</a>)
+            <br><span class="wred">Note: this key expired on 2024-02-17, however has been extended to 2025-05-24. Please update your keyring.</span>`
         }
     },
     "status": {
