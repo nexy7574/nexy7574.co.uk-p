@@ -340,8 +340,10 @@ async function commandWrapper(e) {
     body.appendChild(responseElement);
 
     var flag = 0;
+    let cmdparts = cmdElement.value.split(" ");
+    let cmdmain = cmdparts[0].toLocaleLowerCase();
     for(var command_name of Object.keys(COMMANDS)) {
-        if(command_name == cmdElement.value.toLocaleLowerCase()) {
+        if(command_name == cmdmain) {
             var content = await Promise.resolve(COMMANDS[command_name].exec(cmdElement, responseElement));
             if(content) {
                 responseElement.innerHTML = responseElement.innerHTML || ""
@@ -352,7 +354,7 @@ async function commandWrapper(e) {
         }
     };
     if(flag==0) {
-        responseElement.textContent = `'${cmdElement.value.toLocaleLowerCase()}' is not recognized as an internal or external command, operable program or batch file.`;
+        responseElement.textContent = `'${cmdmain}' is not recognized as an internal or external command, operable program or batch file.`;
     }
     if(!responseElement.innerHTML) {
         // No response, blank line.
