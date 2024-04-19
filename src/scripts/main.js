@@ -239,6 +239,7 @@ function closeWindow(e) {
         () => {
             document.body.parentElement.style.backgroundImage = "url(./images/bsod.jpeg)";
             dingElement.play();
+            setTimeout(window.close, 5000)
         }, 
         Math.random() * 1000
     );
