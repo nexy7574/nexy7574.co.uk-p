@@ -177,6 +177,37 @@ const COMMANDS = {
                 out.innerHTML = `Failed to fetch IP address: ${e}`;
             }
         }
+    },
+    "curl": {
+        "description": "Fetches a URL for you.",
+        "exec": async (cmd, out) => {
+            try {
+                var url = cmd.value.split(" ")[1];
+                var response = await fetch(url);
+                const text = await response.text();
+                out.textContent += text;
+            }
+            catch (e) {
+                out.textContent += `Failed to fetch URL: ${e}`;
+            }
+        }
+    },
+    "wget": {
+        "description": "Downloads a URL for you.",
+        "exec": async (cmd, out) => {
+            try {
+                var url = cmd.value.split(" ")[1];
+                var element = document.createElement("a");
+                element.href = url;
+                element.download = url.split("/").pop();
+                element.click();
+                out.textContent += `Downloaded ${url}`;
+                element.remove();
+            }
+            catch (e) {
+                out.textContent += `Failed to fetch URL: ${e}`;
+            }
+        }
     }
 };
 var MOBILE_ENABLED = false;
