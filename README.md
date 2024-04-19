@@ -19,6 +19,12 @@ You simply need to serve the [src](/src/) directory with your favourite HTTP ser
 
 ```
 example.com, www.example.com {
+    handle /ip {
+        templates
+        header Content-Type text/plain
+        respond "{{.ClientIP}}"
+    }
+
     root * /path/to/website/src
     encode zstd gzip
     header ?Cache-Control `public, max-age=604800, immutable`

@@ -159,35 +159,24 @@ const COMMANDS = {
     },
     "status": {
         "description": "Checks a few services for a cursory uptime check.",
-        "exec": async (_, output) => {
-            try {
-                var response = await fetch("https://matrix.nexy7574.co.uk/api/status");
-                const json = await response.json();
-                document.getElementById("blinker").classList.add("hidden");
-                if (json.online === true) {
-                    output.innerHTML += "<span>NexBox/Matrix is <span class='wgreen'>ONLINE</span>.</span><br>"
-                }
-            } catch (e) {
-                output.innerHTML += "<span>NexBox/Matrix is <span class='wred'>OFFLINE</span></span><br>"
-            }
-
-            // try {
-            //     var response = await fetch("https://droplet.nexy7574.co.uk/jimmy/ping");
-            //     const json = await response.json();
-            //     if (json.online === true) {
-            //         output.innerHTML += "<span>Droplet is <span class='wgreen'>ONLINE</span>.</span><br>"
-            //     }
-            // } catch (e) {
-            //     // window.open("https://status.nexy7574.co.uk", "_blank");
-            //     output.innerHTML += "<span>Droplet is <span class='wred'>OFFLINE</span></span><br>"
-            // }
-
-            // output.innerHTML += "<p><a href='https://status.nexy7574.co.uk' target='_blank' rel='noopener'>See full status here.</a></p>"
-        }
+        "exec": () => {window.open("https://status.nexy7574.co.uk", "_blank")}
     },
     "neofetch": {
         "description": "neofetch",
         "exec": () => `<pre>${__NEOFETCH}</pre>`
+    },
+    "ip": {
+        "description": "Fetches your IP address for you.",
+        "exec": async (_, out) => {
+            try {
+                var response = await fetch("./ip");
+                const ip = await response.text();
+                out.innerHTML = `Your IP address is: ${ip}`;
+            }
+            catch (e) {
+                out.innerHTML = `Failed to fetch IP address: ${e}`;
+            }
+        }
     }
 };
 var MOBILE_ENABLED = false;
